@@ -26,7 +26,7 @@ module Growlyflash
 
   class Engine < ::Rails::Engine
     initializer :growlyflash_xmessage_headers do |config|
-      ActionController::Base.class_eval do
+      ActiveSupport.on_load :action_controller do
         include XMessageHeaders
         helper NoticeHelpers
         after_action :flash_to_headers, if: :is_xhr_request?
